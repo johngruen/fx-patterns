@@ -18,7 +18,7 @@ body {
 }
 
 .deck {
-  background: #fff;
+  background: #ffffffdd;
   border-radius: 5px;
   box-shadow: 0 4px 16px rgba(12, 12, 13, .1);
   box-sizing: border-box;
@@ -75,23 +75,20 @@ label {
 }
 
 #colors {
-  display: flex;
-  flex-wrap: wrap;
+  display:grid;
+  grid-gap: 4px;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: 40px;
 }
 
 .color-label {
-  padding: 5px;
+  height: 100%;
   align-items: center;
   border-radius: 5px;
   font-family: monospace;
   font-size: 18px;
-  margin-bottom: 12px;
   -moz-user-select: none;
-  flex: 0 0 44%;
-}
-
-.color-label:nth-child(odd) {
-  margin-left: 4%;
+  display: flex;
 }
 
 input[type='checkbox'] {
@@ -154,4 +151,13 @@ footer {
 .caret svg{
   width: 100%;
   height: auto;
+}
+
+@media only screen and (max-width: 768px) {
+  .deck {
+    margin: 0;
+    box-shadow: transparent;
+    background: transparent;
+    width: 100%;
+  }
 }
