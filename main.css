@@ -1,7 +1,6 @@
 body {
   margin: 0;
   min-height: 100vh;
-  overflow: hidden;
   position: relative;
   display: flex;
   font-family: sans-serif;
@@ -15,22 +14,23 @@ body {
   left: 0;
   bottom: 0;
   right: 0;
+  overflow: hidden;
 }
 
 .deck {
-  position: relative;
-  box-shadow: 0 4px 16px rgba(12, 12, 13, .1);
-  z-index: 1;
-  flex: 1;
   background: #fff;
-  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 16px rgba(12, 12, 13, .1);
   box-sizing: border-box;
-  width: 300px;
   display: flex;
   flex-direction: column;
+  flex: 1;
   justify-content: space-between;
-  border-radius: 5px;
   margin: 40px;
+  padding: 20px;
+  position: relative;
+  width: 300px;
+  z-index: 1;
 }
 
 .deck.hidden {
