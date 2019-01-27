@@ -160,4 +160,8 @@ footer {
     background: transparent;
     width: 100%;
   }
+
+  #redraw {
+    margin-top: 50px;
+  }
 }
