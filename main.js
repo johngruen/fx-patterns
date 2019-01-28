@@ -54,8 +54,8 @@ class Shape {
 
   setTranslation(w, h) {
     this.rotation = Math.random() * Math.PI * 2;
-    this.offsetX = 2 * Math.random() * w - w;
-    this.offsetY = 2 * Math.random() * h - h;
+    this.offsetX = 1.5 * Math.random() * w - 0.75 * w;
+    this.offsetY = 1.5 * Math.random() * h - 0.75 * h;
   }
 
   setScale(min, max) {
@@ -155,7 +155,8 @@ const toggleDeck = () => {
 };
 
 const toggleDebug = () => {
-  if (shapeLayer.classList.contains('debug')) shapeLayer.classList.remove('debug');
+  if (shapeLayer.classList.contains('debug'))
+    shapeLayer.classList.remove('debug');
   else shapeLayer.classList.add('debug');
 };
 
