@@ -33,31 +33,29 @@ class Shape {
     this.setOpacity(minOpacity, maxOpacity);
     this.setColor(colors);
 
+    this.wrapperEl = document.createElement('div');
+    this.wrapperEl.classList.add('wrapper');
     this.el = document.createElement('div');
     this.el.classList.add(this.shape.name);
     const prime = this.shape.baseEl.cloneNode(true);
     this.el.appendChild(prime);
-    parent.appendChild(this.el);
-  }
-
-  setTweakables(min, max, minOpacity, maxOpacity) {
-    this.setTranslation(window.innerWidth, window.innerHeight);
-    this.setScale(min, max);
-    this.setOpacity(minOpacity, maxOpacity);
-    this.draw();
+    this.wrapperEl.appendChild(this.el);
+    parent.appendChild(this.wrapperEl);
   }
 
   setColor(colors) {
     this.color = colors[Math.floor(Math.random() * colors.length)];
   }
 
-  setOpacity(minOpacity, maxOpacity) {
-    this.opacity = Math.random() * (maxOpacity - minOpacity) + minOpacity;
-  }
-
   setShape(shapes) {
     const shapeIndex = Math.floor(Math.random() * shapes.length);
     this.shape = shapes[shapeIndex];
+  }
+
+  setTranslation(w, h) {
+    this.rotation = Math.random() * Math.PI * 2;
+    this.offsetX = 1.3 * Math.random() * w - .15 * w;
+    this.offsetY = 1.3 * Math.random() * h - .15 * h;
   }
 
   setScale(min, max) {
@@ -68,10 +66,30 @@ class Shape {
     this.height = this.shape.baseHeight * this.scale;
   }
 
-  setTranslation(w, h) {
-    this.rotation = Math.random() * Math.PI * 2;
-    this.offsetX = Math.random() * w;
-    this.offsetY = Math.random() * h;
+  setOpacity(minOpacity, maxOpacity) {
+    this.opacity = Math.random() * (maxOpacity - minOpacity) + minOpacity;
+  }
+
+  setWrapper() {
+    const longSide = this.width >= this.height ? this.width : this.height;
+    this.wrapperEl.style.position = 'absolute';
+    this.wrapperEl.style.display = 'flex';
+    this.wrapperEl.style.alignItems = 'center';
+    this.wrapperEl.style.justifyContent = 'center';
+    this.wrapperEl.style.width = `${longSide}px`;
+    this.wrapperEl.style.height = `${longSide}px`;
+    this.wrapperEl.style.boxSizing = 'border-box';
+    this.wrapperEl.style.transform = `translate(${this.offsetX}px, ${
+      this.offsetY
+    }px)`;
+  }
+
+  setTweakables(min, max, minOpacity, maxOpacity) {
+    this.setTranslation(window.innerWidth, window.innerHeight);
+    this.setScale(min, max);
+    this.setOpacity(minOpacity, maxOpacity);
+    this.setWrapper();
+    this.draw();
   }
 
   // this gets the actual coordinates of the vertices
@@ -99,19 +117,12 @@ class Shape {
     ];
   }
 
-  draw(parent) {
-    this.el.style.top = '0';
-    this.el.style.left = '0';
+  draw() {
     this.el.style.height = `${this.height}px`;
     this.el.style.width = `${this.width}px`;
-    this.el.style.transformOrigin = 'left top';
-    this.el.style.position = 'absolute';
     this.el.style.fill = `${this.color}`;
     this.el.style.opacity = this.opacity;
-    this.el.style.transform = `
-      translate(${this.offsetX}px,
-      ${this.offsetY}px)
-      rotate(${this.rotation}rad)`;
+    this.el.style.transform = `rotate(${this.rotation}rad)`;
   }
 }
 
@@ -141,6 +152,11 @@ const toggleDeck = () => {
     deck.classList.add('hidden');
     localStorage.setItem('deck', 'hidden');
   }
+};
+
+const toggleDebug = () => {
+  if (shapeLayer.classList.contains('debug')) shapeLayer.classList.remove('debug');
+  else shapeLayer.classList.add('debug');
 };
 
 let shapeList = [];
@@ -184,7 +200,8 @@ const setShapes = (reset = true) => {
           SHAPES
         )
       );
-      shapeList[i].draw(shapeLayer);
+      shapeList[i].setWrapper();
+      shapeList[i].draw();
     }
   } else {
     for (let i = 0; i < count; i++) {
@@ -203,9 +220,9 @@ colorEls.forEach(el => {
 });
 redrawButton.addEventListener('click', () => setShapes(false));
 window.addEventListener('keydown', e => {
-  console.log(e);
   if (e.keyCode === 82) setShapes(false);
   if (e.keyCode === 84) toggleDeck();
+  if (e.keyCode === 68) toggleDebug();
 });
 
 if (localStorage.getItem('deck') !== 'hidden') {

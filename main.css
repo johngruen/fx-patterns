@@ -17,6 +17,11 @@ body {
   overflow: hidden;
 }
 
+
+#shape-layer.debug .wrapper {
+  box-shadow: 0 0 0 2px #ff0000a2 inset;
+}
+
 .deck {
   background: #ffffffdd;
   border-radius: 5px;
@@ -151,6 +156,7 @@ footer {
 .caret svg{
   width: 100%;
   height: auto;
+  position: absolute;
 }
 
 @media only screen and (max-width: 768px) {
