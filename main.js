@@ -28,8 +28,8 @@ const SHAPES = [
 class Shape {
   constructor(parent, min, max, minOpacity, maxOpacity, colors, shapes) {
     this.setShape(shapes);
-    this.setTranslation(window.innerWidth, window.innerHeight);
     this.setScale(min, max);
+    this.setTranslation(window.innerWidth, window.innerHeight);
     this.setOpacity(minOpacity, maxOpacity);
     this.setColor(colors);
 
@@ -54,8 +54,8 @@ class Shape {
 
   setTranslation(w, h) {
     this.rotation = Math.random() * Math.PI * 2;
-    this.offsetX = 1.3 * Math.random() * w - .15 * w;
-    this.offsetY = 1.3 * Math.random() * h - .15 * h;
+    this.offsetX = 2 * Math.random() * w - w;
+    this.offsetY = 2 * Math.random() * h - h;
   }
 
   setScale(min, max) {
