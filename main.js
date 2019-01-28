@@ -54,8 +54,8 @@ class Shape {
 
   setTranslation(w, h) {
     this.rotation = Math.random() * Math.PI * 2;
-    this.offsetX = 1.5 * Math.random() * w - 0.75 * w;
-    this.offsetY = 1.5 * Math.random() * h - 0.75 * h;
+    this.offsetX = 1.5 * Math.random() * w - 0.25 * w;
+    this.offsetY = 1.5 * Math.random() * h - 0.25 * h;
   }
 
   setScale(min, max) {
